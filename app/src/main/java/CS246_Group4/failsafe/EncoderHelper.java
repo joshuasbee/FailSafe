@@ -7,7 +7,7 @@ import java.security.GeneralSecurityException;
 
 public class EncoderHelper {
 //    private static final String PASSWORD = "Password";
-    private static final byte[] SALT = "klgasjkhads".getBytes();
+    private static final byte[] SALT = "klgasjkhads".getBytes();//TODO generate a salt and save it
 
     /*
      *   TO USE:
