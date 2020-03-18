@@ -13,13 +13,5 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        Button myButton = (Button) findViewById(R.id.testButton);
     }
-
-//    public void testPassGen(View view){
-//        PasswordGenerator tester = new PasswordGenerator();
-//        tester.generateNewPassword();
-//    }s
-
-
 }
