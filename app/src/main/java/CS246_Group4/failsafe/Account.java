@@ -1,4 +1,4 @@
-package com.example.sharedpref;
+package CS246_Group4.failsafe;
 
 public class Account {
 
