@@ -1,12 +1,12 @@
 package CS246_Group4.failsafe;
 
 import android.content.Context;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 
@@ -63,7 +63,4 @@ public class FileActivity extends AppCompatActivity {
             Log.d("files", ioe.toString());
         }
     }
-}
-
-
 }
