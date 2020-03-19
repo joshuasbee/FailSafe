@@ -18,5 +18,5 @@ public class Account {
         return "username = "+username+" accountname = "+accountname+" URL = "+URL+" password = "+password;
     }
 
-    //Alex's comment
+    //Comment
 }
