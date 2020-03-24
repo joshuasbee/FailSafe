@@ -17,7 +17,7 @@ public class EncoderHelper {
      *   called "password" will be the User Inputted password
      */
 
-    public EncoderHelper(){}
+//    public EncoderHelper(){}
 
     private AesCbcWithIntegrity.SecretKeys getKey(String password, byte[] salt) throws GeneralSecurityException {
         String saltString = AesCbcWithIntegrity.saltString(salt);
