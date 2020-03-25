@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -46,13 +47,21 @@ public class NewAccountCreation extends AppCompatActivity {
         String password = passwordText.getText().toString();
         account = new Account(username, accountname, URL, password);
 
+        Context context = getApplicationContext();
+        CharSequence text = username+" "+accountname+" "+URL+" "+password;
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+
+
         try {
             Gson gson = new Gson();
             String json = gson.toJson(account);
 
             // openFileOutput is the Android function to get a file for writing from the phone.  Wrapped the stream
             // into a BufferedWriter for ease of use.
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(openFileOutput("ParamFile.txt", Context.MODE_PRIVATE)));
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(openFileOutput("Accounts.txt", Context.MODE_PRIVATE)));
             writer.write(json);
             writer.close();
 
