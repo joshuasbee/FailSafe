@@ -2,11 +2,19 @@ package CS246_Group4.failsafe;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.google.gson.Gson;
+
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 
 public class NewAccountCreation extends AppCompatActivity {
 
@@ -37,5 +45,20 @@ public class NewAccountCreation extends AppCompatActivity {
         String URL = URLText.getText().toString();
         String password = passwordText.getText().toString();
         account = new Account(username, accountname, URL, password);
+
+        try {
+            Gson gson = new Gson();
+            String json = gson.toJson(account);
+
+            // openFileOutput is the Android function to get a file for writing from the phone.  Wrapped the stream
+            // into a BufferedWriter for ease of use.
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(openFileOutput("ParamFile.txt", Context.MODE_PRIVATE)));
+            writer.write(json);
+            writer.close();
+
+        }
+        catch (IOException ioe) {
+            Log.d("files",ioe.toString());
+        }
     }
 }
