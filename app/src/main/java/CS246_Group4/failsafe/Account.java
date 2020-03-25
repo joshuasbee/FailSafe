@@ -2,7 +2,7 @@ package CS246_Group4.failsafe;
 
 public class Account {
 
-    private String username;
+    protected String username;
     private String accountname;
     private String URL;
     private String password;

@@ -42,7 +42,7 @@
         app:layout_constraintTop_toBottomOf="@+id/space" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/accountname"
         android:layout_width="264dp"
         android:layout_height="48dp"
         android:layout_marginTop="10dp"
@@ -63,7 +63,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText3" />
+        app:layout_constraintTop_toBottomOf="@+id/accountname" />
 
     <TextView
         android:id="@+id/textView"
@@ -78,7 +78,7 @@
         app:layout_constraintTop_toBottomOf="@+id/space2" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/username"
         android:layout_width="259dp"
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
@@ -98,7 +98,7 @@
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/username" />
 
     <TextView
         android:id="@+id/textView2"
@@ -113,7 +113,7 @@
         app:layout_constraintTop_toBottomOf="@+id/space3" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/password"
         android:layout_width="258dp"
         android:layout_height="53dp"
         android:layout_marginTop="10dp"
@@ -133,7 +133,7 @@
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2" />
+        app:layout_constraintTop_toBottomOf="@+id/password" />
 
     <TextView
         android:id="@+id/textView4"
@@ -148,7 +148,7 @@
         app:layout_constraintTop_toBottomOf="@+id/space4" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/URL"
         android:layout_width="268dp"
         android:layout_height="53dp"
         android:layout_marginTop="10dp"
@@ -168,10 +168,10 @@
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText4" />
+        app:layout_constraintTop_toBottomOf="@+id/URL" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/GeneratePassword"
         android:layout_width="186dp"
         android:layout_height="55dp"
         android:layout_marginTop="30dp"
@@ -183,7 +183,7 @@
         app:layout_constraintTop_toBottomOf="@+id/space5" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/Save"
         android:layout_width="259dp"
         android:layout_height="56dp"
         android:layout_marginTop="20dp"
@@ -195,6 +195,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/GeneratePassword" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
