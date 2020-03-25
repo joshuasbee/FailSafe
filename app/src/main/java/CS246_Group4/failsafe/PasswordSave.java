@@ -12,21 +12,22 @@ import java.security.NoSuchAlgorithmException;
 public class PasswordSave {
     private Hash hasher = new Hash();
 
-    public void writeHashed (String data, Context context) {
+    public void writeString (String data, Context context, int id) throws IOException {
+        String out = "";
         try {
-            OutputStreamWriter writer = new OutputStreamWriter(context.openFileOutput("uno.txt", context.MODE_PRIVATE));
-            String hash = hasher.hashPassword(data);
-            writer.write(hash);
+            OutputStreamWriter writer = new OutputStreamWriter(context.openFileOutput(id + ".txt", context.MODE_PRIVATE));//mode.txt will be 0.txt for password, other numbers for other stuff
+            out = data;
+            writer.write(out);
             writer.close();
-        } catch (IOException | NoSuchAlgorithmException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         };
     }
 
-    public String readHashed (Context context) {
+    public String readString (Context context, int id) {
         String ret = "";
         try {
-            InputStream istream = context.openFileInput("uno.txt");
+            InputStream istream = context.openFileInput(id + ".txt");
             if (istream != null) {
                 InputStreamReader iread = new InputStreamReader(istream);
                 BufferedReader bufferedReader = new BufferedReader(iread);

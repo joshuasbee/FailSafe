@@ -7,7 +7,7 @@ import java.security.GeneralSecurityException;
 
 public class EncoderHelper {
 //    private static final String PASSWORD = "Password";
-    private static final byte[] SALT = "klgasjkhads".getBytes();//TODO generate a salt and save it
+    private static final byte[] SALT = "4NYB7FPmUYwakAzAYhY/fIz4UxhIoU12jnt8f+TUbjWjaBd3TFftAnro24fqSTQ3ujPNg7gvayTV58WbkuRM7AkwgKsIAspIhxewASMFZGv3xXCe0+Zu+PkRLFNTTsZwyVRsYLIibZvuf/DFPea2vhetlnmsKe/FkESJLPMsggQ=".getBytes();
 
     /*
      *   TO USE:
@@ -28,7 +28,7 @@ public class EncoderHelper {
     protected String encodeText(String input, String password) {
         try {
             AesCbcWithIntegrity.SecretKeys key = getKey(password, SALT);//generate key from password, salt will be saved somewhere
-            AesCbcWithIntegrity.CipherTextIvMac cipher = AesCbcWithIntegrity.encrypt(input, key);//encrypt using created key
+            AesCbcWithIntegrity.CipherTextIvMac cipher = AesCbcWithIntegrity.encrypt(input, key);//encrypt input using created key
             return cipher.toString();//returns encrypted text
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
