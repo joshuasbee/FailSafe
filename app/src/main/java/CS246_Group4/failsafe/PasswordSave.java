@@ -45,7 +45,7 @@ public class PasswordSave {
                 istream.close();
                 ret = builder.toString();
             }
-//                Log.e("Success: ", ret);
+
         } catch (IOException e) {
             e.printStackTrace();
         }

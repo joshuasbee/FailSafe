@@ -47,18 +47,18 @@ public class MainActivity extends AppCompatActivity {
             setContentView(R.layout.activity_login);
             loginButton = findViewById(R.id.loginButton);
             loginText = findViewById(R.id.loginText);//Login
-            loginButton.setOnClickListener((view)->login());
+            loginButton.setOnClickListener((view)-> {
+                try {
+                    login();
+                } catch (NoSuchAlgorithmException e) {
+                    e.printStackTrace();
+                }
+            });
             //call different stuff
         }
 
     }
 
-    //TODO Add LOGIN function,
-    /* Will need to use hash function, to hash initial user password and save to
-     *  a file with an inconspicuous name, such as "uno"
-     *  Then we will need to hash the user input to allow us to compare to saved hashed password,
-     *  and if it matches let them into the next activity, the accountlist.
-     * */
     // ----------- REGISTER ACTIVITY CODE -----------
     //when registering, get and save password hash in shared preferences
     private void reg() throws NoSuchAlgorithmException, IOException {
@@ -71,12 +71,13 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
-    private void login() {
+    private void login() throws NoSuchAlgorithmException {
         String input = loginText.getText().toString();
+        String hashInput = hasher.hashPassword(input);
         //loop
-        while (!enc.decodeText(pwd.readString(this, 0), input).equals(loginTest)) {
-            if (enc.decodeText(pwd.readString(this, 0), input).equals(loginTest)) {//attempt to decrypt tester string with user input and compare to actual
-                Log.e("MADE IT HERE!", input);
+
+            Log.e("Decode: ", enc.decodeText(pwd.readString(this, 0), input));
+            if (enc.decodeText(pwd.readString(this, 0), hashInput).equals(loginTest)) {//attempt to decrypt tester string with user input and compare to actual
                 //go to account list activity
                 final Intent list_view = new Intent(this, ListOfAccounts.class);
                 list_view.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
@@ -86,9 +87,7 @@ public class MainActivity extends AppCompatActivity {
                 //toast wrong password
                 Toast.makeText (getApplicationContext(),
                         "Wrong password!", Toast.LENGTH_LONG).show();
+                //TODO add login timer thing "android java countdown timer"
             }
-        }
     }
-
-
 }
