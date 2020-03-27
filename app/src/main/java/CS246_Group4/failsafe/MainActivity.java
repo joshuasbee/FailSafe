@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,17 +25,12 @@ public class MainActivity extends AppCompatActivity {
     private String loginTest = "Success!";
     private EncoderHelper enc = new EncoderHelper();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        registerButton = findViewById(R.id.registerButton);
-//        passwordRegistered = findViewById(R.id.passwordRegistered);
-        loginText = findViewById(R.id.loginText);//Login
-        loginButton = findViewById(R.id.loginButton);//Login
 
-        //get value in shared preferences
-        String tester = pwd.readString(this, 1);
+        //get value in files
+        String tester = pwd.readString(this, 0);
         if (tester == null || tester.length() == 0) { //check files for value present
             setContentView(R.layout.activity_register);
             registerButton = findViewById(R.id.registerButton);
@@ -47,14 +43,15 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
-        else {//first run, create a password and save it
+        else {//Login activity
             setContentView(R.layout.activity_login);
+            loginButton = findViewById(R.id.loginButton);
+            loginText = findViewById(R.id.loginText);//Login
             loginButton.setOnClickListener((view)->login());
             //call different stuff
         }
 
     }
-
 
     //TODO Add LOGIN function,
     /* Will need to use hash function, to hash initial user password and save to
@@ -68,8 +65,10 @@ public class MainActivity extends AppCompatActivity {
         String hashed = hasher.hashPassword(passwordRegistered.getText().toString());//hashes user input
         String test = enc.encodeText(loginTest, hashed);//Encrypt the keystring to verify login with
         pwd.writeString(test, this, 0);//Save the encrypted tester string as 0.txt
-        Intent list_view = new Intent(this, ListOfAccounts.class);
+        final Intent list_view = new Intent(this, ListOfAccounts.class);
+        list_view.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(list_view);
+        finish();
     }
 
     private void login() {
@@ -77,9 +76,12 @@ public class MainActivity extends AppCompatActivity {
         //loop
         while (!enc.decodeText(pwd.readString(this, 0), input).equals(loginTest)) {
             if (enc.decodeText(pwd.readString(this, 0), input).equals(loginTest)) {//attempt to decrypt tester string with user input and compare to actual
+                Log.e("MADE IT HERE!", input);
                 //go to account list activity
-                Intent list_view = new Intent(this, ListOfAccounts.class);
+                final Intent list_view = new Intent(this, ListOfAccounts.class);
+                list_view.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(list_view);
+                finish();
             } else {
                 //toast wrong password
                 Toast.makeText (getApplicationContext(),
