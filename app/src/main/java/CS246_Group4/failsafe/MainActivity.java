@@ -3,11 +3,13 @@ package CS246_Group4.failsafe;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
@@ -26,8 +28,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        registerButton = findViewById(R.id.registerButton);
-        passwordRegistered = findViewById(R.id.passwordRegistered);
+//        registerButton = findViewById(R.id.registerButton);
+//        passwordRegistered = findViewById(R.id.passwordRegistered);
         loginText = findViewById(R.id.loginText);//Login
         loginButton = findViewById(R.id.loginButton);//Login
 
@@ -35,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
         String tester = pwd.readString(this, 1);
         if (tester == null || tester.length() == 0) { //check files for value present
             setContentView(R.layout.activity_register);
+            registerButton = findViewById(R.id.registerButton);
+            passwordRegistered = findViewById(R.id.passwordRegistered);
             registerButton.setOnClickListener((view)-> {
                 try {
                     reg();
@@ -64,15 +68,23 @@ public class MainActivity extends AppCompatActivity {
         String hashed = hasher.hashPassword(passwordRegistered.getText().toString());//hashes user input
         String test = enc.encodeText(loginTest, hashed);//Encrypt the keystring to verify login with
         pwd.writeString(test, this, 0);//Save the encrypted tester string as 0.txt
+        Intent list_view = new Intent(this, ListOfAccounts.class);
+        startActivity(list_view);
     }
 
     private void login() {
         String input = loginText.getText().toString();
-        if (enc.decodeText(pwd.readString(this, 0), input).equals(loginTest)) {//attempt to decrypt tester string with user input and compare to actual
-            //go to account list activity
-        }
-        else {
-            //toast wrong password
+        //loop
+        while (!enc.decodeText(pwd.readString(this, 0), input).equals(loginTest)) {
+            if (enc.decodeText(pwd.readString(this, 0), input).equals(loginTest)) {//attempt to decrypt tester string with user input and compare to actual
+                //go to account list activity
+                Intent list_view = new Intent(this, ListOfAccounts.class);
+                startActivity(list_view);
+            } else {
+                //toast wrong password
+                Toast.makeText (getApplicationContext(),
+                        "Wrong password!", Toast.LENGTH_LONG).show();
+            }
         }
     }
 
