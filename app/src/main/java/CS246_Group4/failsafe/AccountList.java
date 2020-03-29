@@ -5,7 +5,11 @@ import com.google.common.collect.Table;
 import java.util.ArrayList;
 
 public class AccountList {
-    ArrayList<Account> accountList = new ArrayList<Account>(); // Create an ArrayList object
+    private ArrayList<Account> accountList; // Create an ArrayList object
+
+    public AccountList() {
+        accountList = new ArrayList<Account>();
+    }
 
 
     public void setAccountList(ArrayList<Account> accountList) {

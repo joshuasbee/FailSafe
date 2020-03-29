@@ -23,6 +23,7 @@ public class FileActivity extends AppCompatActivity {
     private EditText URL;
     private EditText password;
     private TextView fileContents;
+    private EncoderHelper enc = new EncoderHelper();
 
     public void saveFile(View view) {
         try {

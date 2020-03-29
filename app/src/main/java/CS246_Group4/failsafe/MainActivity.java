@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private Button loginButton;
     private String loginTest = "Success!";
     private EncoderHelper enc = new EncoderHelper();
+    public static final String USERS_HASHED_PASS = "key to find hash of user password";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +66,8 @@ public class MainActivity extends AppCompatActivity {
         String hashed = hasher.hashPassword(passwordRegistered.getText().toString());//hashes user input
         String test = enc.encodeText(loginTest, hashed);//Encrypt the keystring to verify login with
         pwd.writeString(test, this, 0);//Save the encrypted tester string as 0.txt
-        final Intent list_view = new Intent(this, ListOfAccounts.class);
+        final Intent list_view = new Intent(this, ShowAccountsActivity.class);
+        list_view.putExtra(USERS_HASHED_PASS, hashed);
         list_view.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(list_view);
         finish();
@@ -79,7 +81,8 @@ public class MainActivity extends AppCompatActivity {
             Log.e("Decode: ", enc.decodeText(pwd.readString(this, 0), input));
             if (enc.decodeText(pwd.readString(this, 0), hashInput).equals(loginTest)) {//attempt to decrypt tester string with user input and compare to actual
                 //go to account list activity
-                final Intent list_view = new Intent(this, ListOfAccounts.class);
+                final Intent list_view = new Intent(this, ShowAccountsActivity.class);
+                list_view.putExtra(USERS_HASHED_PASS, hashInput);
                 list_view.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(list_view);
                 finish();
