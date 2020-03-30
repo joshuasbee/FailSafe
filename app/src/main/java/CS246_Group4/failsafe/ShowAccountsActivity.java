@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
@@ -23,6 +26,8 @@ public class ShowAccountsActivity extends AppCompatActivity {
     private String usersHashedPass;
     private ListView listOfAccounts;
     private final String USERS_HASHED_PASS = "key to find pass";
+    private ImageButton addNewAccountButton;
+    private Button buttonAdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +36,10 @@ public class ShowAccountsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         usersHashedPass = intent.getStringExtra(MainActivity.USERS_HASHED_PASS);
         loadFile();
+//        addNewAccountButton = findViewById(R.id.addNewAccountButton);
+//        addNewAccountButton.setOnClickListener((view)->addNewAccount(view));
+        buttonAdd = findViewById(R.id.buttonAdd);
+        buttonAdd.setOnClickListener((view)->addNewAccount(view));
     }
 
     public void loadFile(){
