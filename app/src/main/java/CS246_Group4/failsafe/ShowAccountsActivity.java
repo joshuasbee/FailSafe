@@ -52,10 +52,11 @@ public class ShowAccountsActivity extends AppCompatActivity {
             Log.d("files", ioe.toString());
         }
     }
-
+    //function to add new account to file
     public void addNewAccount(View view){
         final Intent addAccount = new Intent(this, NewAccountCreation.class);
         addAccount.putExtra(USERS_HASHED_PASS, usersHashedPass);
         startActivity(addAccount);
+
     }
 }
