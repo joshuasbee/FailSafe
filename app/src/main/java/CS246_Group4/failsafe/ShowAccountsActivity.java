@@ -2,6 +2,7 @@ package CS246_Group4.failsafe;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,8 +16,10 @@ import android.widget.ListView;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ShowAccountsActivity extends AppCompatActivity {
@@ -25,7 +28,7 @@ public class ShowAccountsActivity extends AppCompatActivity {
     private AccountList theMainAccountList;
     private String usersHashedPass;
     private ListView listOfAccounts;
-    private final String USERS_HASHED_PASS = "key to find pass";
+    public static final String USERS_HASHED_PASS = "hash";
     private ImageButton addNewAccountButton;
     private Button buttonAdd;
 
@@ -35,31 +38,55 @@ public class ShowAccountsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_show_accounts);
         Intent intent = getIntent();
         usersHashedPass = intent.getStringExtra(MainActivity.USERS_HASHED_PASS);
+        listOfAccounts = findViewById(R.id.listOfAccounts);
+        Log.e("check", "about to loadfile");
         loadFile();
 //        addNewAccountButton = findViewById(R.id.addNewAccountButton);
 //        addNewAccountButton.setOnClickListener((view)->addNewAccount(view));
         buttonAdd = findViewById(R.id.buttonAdd);
         buttonAdd.setOnClickListener((view)->addNewAccount(view));
+
     }
 
     public void loadFile(){
-        try {
+        if (true){
+            Log.e("getting into loadfile", "we are in loadfile function");
+        }
+//        try {
+            Log.e("check", "checking that we are entering try statement");
             // openFileInput is the Android function to get a file for reading from the phone.  Wrapped the stream
             // into a BufferedRead for ease of use.
-            BufferedReader reader = new BufferedReader(new InputStreamReader(openFileInput("Accounts.txt")));
-            String json = reader.readLine();
-            reader.close();
+//            BufferedReader reader = new BufferedReader(new InputStreamReader(openFileInput("Accounts.txt")));
 
-            json = enc.decodeText(json, usersHashedPass);
+            String file = pwd.readString(1);
             Gson gson = new Gson();
-            AccountList accounts = gson.fromJson(json, AccountList.class);
-            List<Account> listAccounts = accounts.getAccountList();
-            final ArrayAdapter<Account> accountAdapter = new ArrayAdapter<Account>(this, android.R.layout.simple_list_item_1, listAccounts);
+            PasswordSave pwd = new PasswordSave();
+            ArrayList<Account> acctsList = new ArrayList<>();
+            String decrypted;
+            // TODO: add scanner to go line by line and add to array list so that the while loop works
+            while (){
+                Log.e("check", file);
+                decrypted = enc.decodeText(file, usersHashedPass);
+
+                acctsList.add(gson.fromJson(decrypted, Account.class));
+                Log.e("check", "checking for infinite loop");
+            }
+            if (acctsList.isEmpty()){
+                Log.e("debugging", "list is empty");
+            }
+//            else{
+//                Log.e("debugging", acctsList.toString());
+//            }
+//            reader.close();
+//            AccountList theMainList = new AccountList();
+//            theMainList.setAccountList(acctsList);
+
+            final ArrayAdapter<Account> accountAdapter = new ArrayAdapter<Account>(this, android.R.layout.simple_list_item_1, acctsList);
             listOfAccounts.setAdapter(accountAdapter);
-        }
-        catch (IOException ioe) {
-            Log.d("files", ioe.toString());
-        }
+//        }
+//        catch (IOException ioe) {
+//            Log.d("files", ioe.toString());
+//        }
     }
     //function to add new account to file
     public void addNewAccount(View view){

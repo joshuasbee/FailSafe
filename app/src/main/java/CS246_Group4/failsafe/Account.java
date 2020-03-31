@@ -14,6 +14,10 @@ public class Account {
         this.password = password;
     }
 
+    public String getAccountName(){
+        return accountname;
+    }
+
     public String toString() {
         return "username = "+username+" accountname = "+accountname+" URL = "+URL+" password = "+password;
     }

@@ -14,8 +14,14 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
 public class NewAccountCreation extends AppCompatActivity {
@@ -29,6 +35,9 @@ public class NewAccountCreation extends AppCompatActivity {
     private EditText URLText;
     private EncoderHelper enc;
     private String userHashPass;
+    private boolean needToCreateFile = true;
+    private PasswordSave pwd = new PasswordSave();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,14 +48,15 @@ public class NewAccountCreation extends AppCompatActivity {
         passwordText = findViewById(R.id.password);
         URLText = findViewById(R.id.URL);
         Intent intent = getIntent();
-        userHashPass = intent.getStringExtra(MainActivity.USERS_HASHED_PASS);
+        userHashPass = intent.getStringExtra(ShowAccountsActivity.USERS_HASHED_PASS);
+        Log.e("check intent",userHashPass);
 
         Save = findViewById(R.id.Save);
 
         Save.setOnClickListener((view)->save());
-
     }
     private void save() {
+
         String username = usernameText.getText().toString();
         String accountname = accountnameText.getText().toString();
         String URL = URLText.getText().toString();
@@ -61,24 +71,30 @@ public class NewAccountCreation extends AppCompatActivity {
         toast.show();
 
 
-        try {
+      try {
             Gson gson = new Gson();
             String json = gson.toJson(account);
             enc = new EncoderHelper();
-            Log.d("debugging json", json);
-            Log.d("debugging again", userHashPass);
-            json = enc.encodeText(json, userHashPass);
+            json = enc.encodeText(userHashPass, json);
+            Log.e("match", json);
+
+            pwd.writeString(json,  1);
+
 
 
             // openFileOutput is the Android function to get a file for writing from the phone.  Wrapped the stream
             // into a BufferedWriter for ease of use.
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(openFileOutput("Accounts.txt", Context.MODE_PRIVATE)));
-            writer.write(json);
-            writer.close();
+//            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(openFileOutput("Accounts.txt", Context.MODE_PRIVATE)));
+//            BufferedReader reader = new BufferedReader(new FileReader("Accounts.txt"));
+
+//            writer.append(json);
+//            writer.newLine();
+//            writer.close();
+//            Log.e("debug", reader.readLine());
 
         }
         catch (IOException ioe) {
-            Log.d("files",ioe.toString());
+            Log.e("files",ioe.toString());
         }
 
         //TODO: add functionality to automatically switch to previous activity after saving

@@ -25,14 +25,16 @@ public class MainActivity extends AppCompatActivity {
     private Button fingerprintButton;
     private String loginTest = "Success!";
     private EncoderHelper enc = new EncoderHelper();
-    public static final String USERS_HASHED_PASS = "key to find hash of user password";
+    public static final String USERS_HASHED_PASS = "hash";
+    private static Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mContext = this;
 
         //get value in files
-        String tester = pwd.readString(this, 0);
+        String tester = pwd.readString( 0);
         if (tester == null || tester.length() == 0) { //check files for value present
             setContentView(R.layout.activity_register);
             registerButton = findViewById(R.id.registerButton);
@@ -71,12 +73,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public static Context getContext(){
+
+        return mContext;
+    }
+
     // ----------- REGISTER ACTIVITY CODE -----------
     //when registering, get and save password hash in shared preferences
     private void reg() throws NoSuchAlgorithmException, IOException {
         String hashed = hasher.hashPassword(passwordRegistered.getText().toString());//hashes user input
         String test = enc.encodeText(loginTest, hashed);//Encrypt the keystring to verify login with
-        pwd.writeString(test, this, 0);//Save the encrypted tester string as 0.txt
+        pwd.writeString(test, 0);//Save the encrypted tester string as 0.txt
         final Intent list_view = new Intent(this, ShowAccountsActivity.class);
         list_view.putExtra(USERS_HASHED_PASS, hashed);
         list_view.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
@@ -89,10 +96,11 @@ public class MainActivity extends AppCompatActivity {
         String hashInput = hasher.hashPassword(input);
         //loop
 
-            Log.e("Decode: ", enc.decodeText(pwd.readString(this, 0), input));
-            if (enc.decodeText(pwd.readString(this, 0), hashInput).equals(loginTest)) {//attempt to decrypt tester string with user input and compare to actual
+            Log.e("Decode: ", enc.decodeText(pwd.readString( 0), input));
+            if (enc.decodeText(pwd.readString( 0), hashInput).equals(loginTest)) {//attempt to decrypt tester string with user input and compare to actual
                 //go to account list activity
                 final Intent list_view = new Intent(this, ShowAccountsActivity.class);
+                Log.e("login hash", hashInput);
                 list_view.putExtra(USERS_HASHED_PASS, hashInput);
                 list_view.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(list_view);
@@ -105,9 +113,9 @@ public class MainActivity extends AppCompatActivity {
             }
     }
 
-    private void scanFinger() throws NoSuchAlgorithmException,  IOException {
-        final Intent list_view = new Intent(this, FingerPrintScanner.class);
-        startActivity(list_view);
-        finish();
-    }
+//    private void scanFinger() throws NoSuchAlgorithmException,  IOException {
+//        final Intent list_view = new Intent(this, FingerPrintScanner.class);
+//        startActivity(list_view);
+//        finish();
+//    }
 }
