@@ -31,7 +31,7 @@ import android.widget.Button;
 import android.content.Intent;
 
 
-public class FingerPrint extends AppCompatActivity {
+public class FingerPrintScanner extends AppCompatActivity {
 
     private KeyStore keyStore;
     private static final String KEY_NAME="EDMTDev";
