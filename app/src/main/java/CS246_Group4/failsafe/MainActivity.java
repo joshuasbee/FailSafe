@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private Button registerButton;
     private EditText loginText;
     private Button loginButton;
+    private Button fingerprintButton;
     private String loginTest = "Success!";
     private EncoderHelper enc = new EncoderHelper();
     public static final String USERS_HASHED_PASS = "key to find hash of user password";
@@ -55,7 +56,17 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             });
-            //call different stuff
+
+
+            //call fingerprint activity
+            fingerprintButton = findViewById(R.id.printButton);
+            fingerprintButton.setOnClickListener((view)-> {
+                try {
+                    scanFinger();
+                } catch (NoSuchAlgorithmException | IOException e) {
+                    e.printStackTrace();
+                }
+            });
         }
 
     }
