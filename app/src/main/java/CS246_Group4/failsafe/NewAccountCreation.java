@@ -3,6 +3,7 @@ package CS246_Group4.failsafe;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.util.Log;
@@ -26,6 +27,9 @@ public class NewAccountCreation extends AppCompatActivity {
     private EditText accountnameText;
     private EditText passwordText;
     private EditText URLText;
+    private EncoderHelper enc;
+    private String userHashPass;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +38,8 @@ public class NewAccountCreation extends AppCompatActivity {
         accountnameText = findViewById(R.id.accountname);
         passwordText = findViewById(R.id.password);
         URLText = findViewById(R.id.URL);
+        Intent intent = getIntent();
+        userHashPass = intent.getStringExtra(MainActivity.USERS_HASHED_PASS);
 
         Save = findViewById(R.id.Save);
 
@@ -58,6 +64,8 @@ public class NewAccountCreation extends AppCompatActivity {
         try {
             Gson gson = new Gson();
             String json = gson.toJson(account);
+            enc = new EncoderHelper();
+            json = enc.encodeText(json, userHashPass);
 
             // openFileOutput is the Android function to get a file for writing from the phone.  Wrapped the stream
             // into a BufferedWriter for ease of use.

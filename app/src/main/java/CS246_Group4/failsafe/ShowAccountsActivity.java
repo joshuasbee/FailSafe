@@ -46,7 +46,7 @@ public class ShowAccountsActivity extends AppCompatActivity {
         try {
             // openFileInput is the Android function to get a file for reading from the phone.  Wrapped the stream
             // into a BufferedRead for ease of use.
-            BufferedReader reader = new BufferedReader(new InputStreamReader(openFileInput("ParamFile.txt")));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(openFileInput("Accounts.txt")));
             String json = reader.readLine();
             reader.close();
 
@@ -66,6 +66,5 @@ public class ShowAccountsActivity extends AppCompatActivity {
         final Intent addAccount = new Intent(this, NewAccountCreation.class);
         addAccount.putExtra(USERS_HASHED_PASS, usersHashedPass);
         startActivity(addAccount);
-
     }
 }
