@@ -93,4 +93,10 @@ public class MainActivity extends AppCompatActivity {
                 //TODO add login timer thing "android java countdown timer"
             }
     }
+
+    private void scanFinger() throws NoSuchAlgorithmException,  IOException {
+        final Intent list_view = new Intent(this, FingerPrint.class);
+        startActivity(list_view);
+        finish();
+    }
 }
