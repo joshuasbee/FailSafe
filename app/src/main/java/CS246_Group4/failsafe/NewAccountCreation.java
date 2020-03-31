@@ -65,7 +65,10 @@ public class NewAccountCreation extends AppCompatActivity {
             Gson gson = new Gson();
             String json = gson.toJson(account);
             enc = new EncoderHelper();
+            Log.d("debugging json", json);
+            Log.d("debugging again", userHashPass);
             json = enc.encodeText(json, userHashPass);
+
 
             // openFileOutput is the Android function to get a file for writing from the phone.  Wrapped the stream
             // into a BufferedWriter for ease of use.
@@ -77,5 +80,7 @@ public class NewAccountCreation extends AppCompatActivity {
         catch (IOException ioe) {
             Log.d("files",ioe.toString());
         }
+
+        //TODO: add functionality to automatically switch to previous activity after saving
     }
 }
