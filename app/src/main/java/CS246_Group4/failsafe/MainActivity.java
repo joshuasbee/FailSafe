@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void scanFinger() throws NoSuchAlgorithmException,  IOException {
-        final Intent list_view = new Intent(this, FingerPrint.class);
+        final Intent list_view = new Intent(this, FingerPrintScanner.class);
         startActivity(list_view);
         finish();
     }
