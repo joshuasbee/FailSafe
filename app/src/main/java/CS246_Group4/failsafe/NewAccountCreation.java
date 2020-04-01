@@ -14,8 +14,11 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
 public class NewAccountCreation extends AppCompatActivity {
@@ -70,8 +73,32 @@ public class NewAccountCreation extends AppCompatActivity {
 
             // openFileOutput is the Android function to get a file for writing from the phone.  Wrapped the stream
             // into a BufferedWriter for ease of use.
+
+            InputStream istream = this.openFileInput("Accounts.txt");
+            String fileContents;
+
+            if (istream != null) {
+                InputStreamReader iread = new InputStreamReader(istream);
+                BufferedReader bufferedReader = new BufferedReader(iread);
+                String receiveString = "";
+                StringBuilder builder = new StringBuilder();
+
+                while ((receiveString = bufferedReader.readLine()) != null) {
+                    builder.append(System.lineSeparator()).append(receiveString);
+                }
+                istream.close();
+                fileContents = builder.toString();
+            }
+            else{
+                fileContents = json;
+            }
+
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(openFileOutput("Accounts.txt", Context.MODE_PRIVATE)));
-            writer.write(json);
+            writer.write(fileContents);
+            writer.newLine();
+            if (fileContents != json) {
+                writer.write(json);
+            }
             writer.close();
 
         }

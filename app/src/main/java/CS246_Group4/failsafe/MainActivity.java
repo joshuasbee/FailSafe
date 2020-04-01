@@ -12,7 +12,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.security.NoSuchAlgorithmException;
 
 public class MainActivity extends AppCompatActivity {
@@ -66,6 +68,9 @@ public class MainActivity extends AppCompatActivity {
         String hashed = hasher.hashPassword(passwordRegistered.getText().toString());//hashes user input
         String test = enc.encodeText(loginTest, hashed);//Encrypt the keystring to verify login with
         pwd.writeString(test, this, 0);//Save the encrypted tester string as 0.txt
+        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(openFileOutput("Accounts.txt", Context.MODE_PRIVATE)));
+        writer.write("");
+        writer.close();
         final Intent list_view = new Intent(this, ShowAccountsActivity.class);
         list_view.putExtra(USERS_HASHED_PASS, hashed);
         list_view.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);

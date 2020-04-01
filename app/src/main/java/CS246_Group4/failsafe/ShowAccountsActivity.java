@@ -43,18 +43,24 @@ public class ShowAccountsActivity extends AppCompatActivity {
 
     public void loadFile(){
         List<Account> listAccounts = new ArrayList<>();
+        Gson gson = new Gson();
+        String fileContents;
+        String decrypted;
+        Account tempAccount;
         try {
             // openFileInput is the Android function to get a file for reading from the phone.  Wrapped the stream
             // into a BufferedRead for ease of use.
             BufferedReader reader = new BufferedReader(new InputStreamReader(openFileInput("Accounts.txt")));
-            String json = reader.readLine();
-            String thing;
+//            String anotherTest = reader.readLine();
 
-            thing = enc.decodeText(json, usersHashedPass);
-            Gson gson = new Gson();
-            Account accounts = gson.fromJson(thing, Account.class);
-//            List<Account> listAccounts = accounts.getAccountList();
-            listAccounts.add(accounts);
+            while ((fileContents = reader.readLine()) != null) {
+                if (!fileContents.equals("")) {
+                    decrypted = enc.decodeText(fileContents, usersHashedPass);
+                    tempAccount = gson.fromJson(decrypted, Account.class);
+                    listAccounts.add(tempAccount);
+                }
+            }
+
             reader.close();
             final ArrayAdapter<Account> accountAdapter = new ArrayAdapter<Account>(this, android.R.layout.simple_list_item_1, listAccounts);
             listOfAccounts.setAdapter(accountAdapter);
