@@ -25,8 +25,7 @@ public class ShowAccountsActivity extends AppCompatActivity {
     private AccountList theMainAccountList;
     private String usersHashedPass;
     private ListView listOfAccounts;
-    private final String USERS_HASHED_PASS = "key to find pass";
-    private ImageButton addNewAccountButton;
+    public static final String USERS_HASHED_PASS = "hash";
     private Button buttonAdd;
 
     @Override
@@ -36,8 +35,6 @@ public class ShowAccountsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         usersHashedPass = intent.getStringExtra(MainActivity.USERS_HASHED_PASS);
         loadFile();
-//        addNewAccountButton = findViewById(R.id.addNewAccountButton);
-//        addNewAccountButton.setOnClickListener((view)->addNewAccount(view));
         buttonAdd = findViewById(R.id.buttonAdd);
         buttonAdd.setOnClickListener((view)->addNewAccount(view));
     }
@@ -48,17 +45,18 @@ public class ShowAccountsActivity extends AppCompatActivity {
             // into a BufferedRead for ease of use.
             BufferedReader reader = new BufferedReader(new InputStreamReader(openFileInput("Accounts.txt")));
             String json = reader.readLine();
-            reader.close();
+            String thing;
 
-            json = enc.decodeText(json, usersHashedPass);
+            thing = enc.decodeText(json, usersHashedPass);
             Gson gson = new Gson();
-            AccountList accounts = gson.fromJson(json, AccountList.class);
+            AccountList accounts = gson.fromJson(thing, AccountList.class);
             List<Account> listAccounts = accounts.getAccountList();
+            reader.close();
             final ArrayAdapter<Account> accountAdapter = new ArrayAdapter<Account>(this, android.R.layout.simple_list_item_1, listAccounts);
             listOfAccounts.setAdapter(accountAdapter);
         }
         catch (IOException ioe) {
-            Log.d("files", ioe.toString());
+            Log.e("files", ioe.toString());
         }
     }
     //function to add new account to file

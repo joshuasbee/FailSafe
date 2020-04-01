@@ -39,7 +39,8 @@ public class NewAccountCreation extends AppCompatActivity {
         passwordText = findViewById(R.id.password);
         URLText = findViewById(R.id.URL);
         Intent intent = getIntent();
-        userHashPass = intent.getStringExtra(MainActivity.USERS_HASHED_PASS);
+        userHashPass = intent.getStringExtra(ShowAccountsActivity.USERS_HASHED_PASS);
+
 
         Save = findViewById(R.id.Save);
 

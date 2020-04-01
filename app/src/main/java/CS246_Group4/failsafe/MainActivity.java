@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private Button loginButton;
     private String loginTest = "Success!";
     private EncoderHelper enc = new EncoderHelper();
-    public static final String USERS_HASHED_PASS = "key to find hash of user password";
+    public static final String USERS_HASHED_PASS = "hash";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
