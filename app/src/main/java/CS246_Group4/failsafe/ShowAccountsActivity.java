@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class ShowAccountsActivity extends AppCompatActivity {
     private PasswordSave pwd = new PasswordSave();
@@ -64,7 +65,8 @@ public class ShowAccountsActivity extends AppCompatActivity {
             ArrayList<Account> acctsList = new ArrayList<>();
             String decrypted;
             // TODO: add scanner to go line by line and add to array list so that the while loop works
-            while (){
+            Scanner scanner = new Scanner((Readable) acctsList);
+            while (scanner.next() != null){
                 Log.e("check", file);
                 decrypted = enc.decodeText(file, usersHashedPass);
 
@@ -88,6 +90,8 @@ public class ShowAccountsActivity extends AppCompatActivity {
 //            Log.d("files", ioe.toString());
 //        }
     }
+
+
     //function to add new account to file
     public void addNewAccount(View view){
         final Intent addAccount = new Intent(this, NewAccountCreation.class);
