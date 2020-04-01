@@ -15,8 +15,9 @@
             android:name=".ListOfAccounts"
             android:label="@string/title_activity_list_of_accounts"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".SettingsActivity" />
-        <activity android:name=".NewAccountCreation" />
+        <activity android:name=".NewAccountCreation" >
+
+        </activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ShowAccountsActivity extends AppCompatActivity {
@@ -32,6 +33,7 @@ public class ShowAccountsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_accounts);
+        listOfAccounts = findViewById(R.id.listOfAccounts);
         Intent intent = getIntent();
         usersHashedPass = intent.getStringExtra(MainActivity.USERS_HASHED_PASS);
         loadFile();
@@ -40,6 +42,7 @@ public class ShowAccountsActivity extends AppCompatActivity {
     }
 
     public void loadFile(){
+        List<Account> listAccounts = new ArrayList<>();
         try {
             // openFileInput is the Android function to get a file for reading from the phone.  Wrapped the stream
             // into a BufferedRead for ease of use.
@@ -49,8 +52,9 @@ public class ShowAccountsActivity extends AppCompatActivity {
 
             thing = enc.decodeText(json, usersHashedPass);
             Gson gson = new Gson();
-            AccountList accounts = gson.fromJson(thing, AccountList.class);
-            List<Account> listAccounts = accounts.getAccountList();
+            Account accounts = gson.fromJson(thing, Account.class);
+//            List<Account> listAccounts = accounts.getAccountList();
+            listAccounts.add(accounts);
             reader.close();
             final ArrayAdapter<Account> accountAdapter = new ArrayAdapter<Account>(this, android.R.layout.simple_list_item_1, listAccounts);
             listOfAccounts.setAdapter(accountAdapter);
