@@ -76,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
     private void login() throws NoSuchAlgorithmException {
         String input = loginText.getText().toString();
         String hashInput = hasher.hashPassword(input);
-        //loop
 
             Log.e("Decode: ", enc.decodeText(pwd.readString(this, 0), input));
             if (enc.decodeText(pwd.readString(this, 0), hashInput).equals(loginTest)) {//attempt to decrypt tester string with user input and compare to actual
