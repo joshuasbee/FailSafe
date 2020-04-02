@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -27,6 +28,7 @@ public class ShowAccountsActivity extends AppCompatActivity {
     private String usersHashedPass;
     private ListView listOfAccounts;
     public static final String USERS_HASHED_PASS = "hash";
+    public  static final String PARCEL_DATA = "parcelable data";
     private Button buttonAdd;
 
     @Override
@@ -37,6 +39,14 @@ public class ShowAccountsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         usersHashedPass = intent.getStringExtra(MainActivity.USERS_HASHED_PASS);
         loadFile();
+        //the following is a listener for the items within the listview
+        listOfAccounts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                  Account accountToBeAccessed = (Account) listOfAccounts.getItemAtPosition(position);
+                  viewAccountInfo(view, accountToBeAccessed);
+            }
+        });
         buttonAdd = findViewById(R.id.buttonAdd);
         buttonAdd.setOnClickListener((view)->addNewAccount(view));
     }
@@ -74,5 +84,11 @@ public class ShowAccountsActivity extends AppCompatActivity {
         final Intent addAccount = new Intent(this, NewAccountCreation.class);
         addAccount.putExtra(USERS_HASHED_PASS, usersHashedPass);
         startActivity(addAccount);
+    }
+
+    public void viewAccountInfo(View view, Account accessedAccount){
+        final Intent viewAccount = new Intent(this, ViewSingleAccountActivity.class);
+        viewAccount.putExtra(PARCEL_DATA, accessedAccount);
+        startActivity(viewAccount);
     }
 }

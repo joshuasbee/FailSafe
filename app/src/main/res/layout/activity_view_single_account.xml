@@ -7,21 +7,21 @@
     tools:context=".NewAccountCreation">
 
     <Space
-        android:id="@+id/space"
+        android:id="@+id/space10"
         android:layout_width="416dp"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newAccountHeader" />
+        app:layout_constraintTop_toBottomOf="@+id/viewAccountHeader" />
 
     <TextView
-        android:id="@+id/newAccountHeader"
+        android:id="@+id/viewAccountHeader"
         android:layout_width="272dp"
         android:layout_height="47dp"
         android:layout_marginTop="10dp"
-        android:text="New Account"
+        android:text="Account Info"
         android:textAlignment="center"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,7 +29,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/accountName"
         android:layout_width="99dp"
         android:layout_height="38dp"
         android:layout_marginStart="16dp"
@@ -39,10 +39,10 @@
         android:textAlignment="center"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/space" />
+        app:layout_constraintTop_toBottomOf="@+id/space10" />
 
     <EditText
-        android:id="@+id/accountname"
+        android:id="@+id/editAccountName"
         android:layout_width="350dp"
         android:layout_height="48dp"
         android:layout_marginTop="10dp"
@@ -53,20 +53,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/accountName" />
 
     <Space
-        android:id="@+id/space2"
+        android:id="@+id/space11"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/accountname" />
+        app:layout_constraintTop_toBottomOf="@+id/editAccountName" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/username"
         android:layout_width="176dp"
         android:layout_height="53dp"
         android:layout_marginStart="16dp"
@@ -75,10 +75,10 @@
         android:textAlignment="center"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/space2" />
+        app:layout_constraintTop_toBottomOf="@+id/space11" />
 
     <EditText
-        android:id="@+id/username"
+        android:id="@+id/editUsername"
         android:layout_width="350dp"
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
@@ -89,19 +89,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/username" />
 
     <Space
-        android:id="@+id/space3"
+        android:id="@+id/space12"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username" />
+        app:layout_constraintTop_toBottomOf="@+id/editUsername" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/password"
         android:layout_width="165dp"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
@@ -110,10 +110,10 @@
         android:textAlignment="center"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/space3" />
+        app:layout_constraintTop_toBottomOf="@+id/space12" />
 
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/editPassword"
         android:layout_width="350dp"
         android:layout_height="53dp"
         android:layout_marginTop="10dp"
@@ -124,19 +124,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/password" />
 
     <Space
-        android:id="@+id/space4"
+        android:id="@+id/space13"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password" />
+        app:layout_constraintTop_toBottomOf="@+id/editPassword" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/URL"
         android:layout_width="82dp"
         android:layout_height="47dp"
         android:layout_marginStart="16dp"
@@ -145,10 +145,10 @@
         android:textAlignment="center"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/space4" />
+        app:layout_constraintTop_toBottomOf="@+id/space13" />
 
     <EditText
-        android:id="@+id/URL"
+        android:id="@+id/editURL"
         android:layout_width="350dp"
         android:layout_height="53dp"
         android:layout_marginTop="10dp"
@@ -159,16 +159,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/URL" />
 
     <Space
-        android:id="@+id/space5"
+        android:id="@+id/space14"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/URL" />
+        app:layout_constraintTop_toBottomOf="@+id/editURL" />
 
     <Button
         android:id="@+id/GeneratePassword"
@@ -181,7 +181,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/space5" />
+        app:layout_constraintTop_toBottomOf="@+id/space14" />
 
     <Button
         android:id="@+id/Save"
