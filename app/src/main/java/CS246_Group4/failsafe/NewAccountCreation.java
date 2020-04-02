@@ -107,6 +107,9 @@ public class NewAccountCreation extends AppCompatActivity {
         catch (IOException ioe) {
             Log.d("files",ioe.toString());
         }
+        final Intent returnToAccountsPage = new Intent(this, ShowAccountsActivity.class);
+        returnToAccountsPage.putExtra(MainActivity.USERS_HASHED_PASS, userHashPass);
+        startActivity(returnToAccountsPage);
     }
 
     public void generatePwd(View view){
