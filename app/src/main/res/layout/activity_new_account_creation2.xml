@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FileActivity">
+    tools:context=".NewAccountCreation">
 
     <Space
         android:id="@+id/space"
@@ -175,6 +175,7 @@
         android:layout_width="186dp"
         android:layout_height="55dp"
         android:layout_marginTop="30dp"
+        android:onClick="generatePwd"
         android:text="Generate Password"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"

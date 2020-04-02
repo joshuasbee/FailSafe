@@ -15,8 +15,12 @@
             android:name=".ListOfAccounts"
             android:label="@string/title_activity_list_of_accounts"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".NewAccountCreation" >
-
+        <activity android:name=".NewAccountCreation"
+            android:parentActivityName=".ShowAccountsActivity">
+            <!-- The meta-data tag is required if you support API level 15 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ShowAccountsActivity" />
         </activity>
         <activity android:name=".MainActivity">
             <intent-filter>

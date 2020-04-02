@@ -32,6 +32,7 @@ public class NewAccountCreation extends AppCompatActivity {
     private EditText URLText;
     private EncoderHelper enc;
     private String userHashPass;
+    private Button pwdGenerator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,7 @@ public class NewAccountCreation extends AppCompatActivity {
         accountnameText = findViewById(R.id.accountname);
         passwordText = findViewById(R.id.password);
         URLText = findViewById(R.id.URL);
+        pwdGenerator = findViewById(R.id.GeneratePassword);
         Intent intent = getIntent();
         userHashPass = intent.getStringExtra(ShowAccountsActivity.USERS_HASHED_PASS);
 
@@ -105,5 +107,11 @@ public class NewAccountCreation extends AppCompatActivity {
         catch (IOException ioe) {
             Log.d("files",ioe.toString());
         }
+    }
+
+    public void generatePwd(View view){
+        PasswordGenerator passwordGenerator = new PasswordGenerator();
+        String randomStrongPwd = passwordGenerator.generateNewPassword();
+        passwordText.setText(randomStrongPwd);
     }
 }
