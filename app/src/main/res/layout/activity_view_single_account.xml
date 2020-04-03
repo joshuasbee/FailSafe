@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NewAccountCreation">
+    tools:context=".ViewSingleAccountActivity">
 
     <Space
         android:id="@+id/space10"
@@ -189,6 +189,7 @@
         android:layout_height="56dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="16dp"
+        android:onClick="editAccount"
         android:text="Save"
         android:textAlignment="center"
         android:textSize="25sp"

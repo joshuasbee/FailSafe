@@ -103,6 +103,7 @@ public class ShowAccountsActivity extends AppCompatActivity {
     public void viewAccountInfo(View view, Account accessedAccount){
         final Intent viewAccount = new Intent(this, ViewSingleAccountActivity.class);
         viewAccount.putExtra(PARCEL_DATA, accessedAccount);
+        viewAccount.putExtra(USERS_HASHED_PASS, usersHashedPass);
         startActivity(viewAccount);
     }
 
