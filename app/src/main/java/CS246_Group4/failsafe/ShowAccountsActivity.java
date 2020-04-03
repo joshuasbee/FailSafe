@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -53,6 +54,16 @@ public class ShowAccountsActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                   Account accountToBeAccessed = (Account) listOfAccounts.getItemAtPosition(position);
                   viewAccountInfo(view, accountToBeAccessed);
+            }
+        });
+        listOfAccounts.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Account accountToBeAccessed = (Account) listOfAccounts.getItemAtPosition(position);
+                Uri webpage = Uri.parse("http://" + accountToBeAccessed.getURL());
+                Intent webIntent = new Intent(Intent.ACTION_VIEW, webpage);
+                startActivity(webIntent);
+                return true;
             }
         });
         buttonAdd = findViewById(R.id.buttonAdd);
