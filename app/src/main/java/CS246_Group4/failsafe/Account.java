@@ -9,6 +9,7 @@ public class Account implements Parcelable {
     private String accountname;
     private String URL;
     private String password;
+    private int fileLine;
 
     public Account(Parcel in) {
         username = in.readString();
@@ -22,6 +23,14 @@ public class Account implements Parcelable {
         this.accountname = accountname;
         this.URL = URL;
         this.password = password;
+    }
+
+    public int getFileLine() {
+        return fileLine;
+    }
+
+    public void setFileLine(int fileLine) {
+        this.fileLine = fileLine;
     }
 
     public String getUsername() {

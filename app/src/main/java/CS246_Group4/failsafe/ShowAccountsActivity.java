@@ -2,7 +2,9 @@ package CS246_Group4.failsafe;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -30,6 +32,8 @@ public class ShowAccountsActivity extends AppCompatActivity {
     public static final String USERS_HASHED_PASS = "hash";
     public  static final String PARCEL_DATA = "parcelable data";
     private Button buttonAdd;
+    private Context context = this;
+    SharedPreferences sharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,10 @@ public class ShowAccountsActivity extends AppCompatActivity {
         listOfAccounts = findViewById(R.id.listOfAccounts);
         Intent intent = getIntent();
         usersHashedPass = intent.getStringExtra(MainActivity.USERS_HASHED_PASS);
+        if (usersHashedPass == null){
+            SharedPreferences sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
+            usersHashedPass = sharedPreferences.getString(getString(R.string.pref_file_key), "no password");
+        }
         loadFile();
         //the following is a listener for the items within the listview
         listOfAccounts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -49,6 +57,10 @@ public class ShowAccountsActivity extends AppCompatActivity {
         });
         buttonAdd = findViewById(R.id.buttonAdd);
         buttonAdd.setOnClickListener((view)->addNewAccount(view));
+        sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(getString(R.string.pref_file_key), usersHashedPass);
+        editor.commit();
     }
 
     public void loadFile(){
@@ -65,6 +77,7 @@ public class ShowAccountsActivity extends AppCompatActivity {
 
             while ((fileContents = reader.readLine()) != null) {
                 if (!fileContents.equals("")) {
+
                     decrypted = enc.decodeText(fileContents, usersHashedPass);
                     tempAccount = gson.fromJson(decrypted, Account.class);
                     listAccounts.add(tempAccount);
@@ -79,6 +92,7 @@ public class ShowAccountsActivity extends AppCompatActivity {
             Log.e("files", ioe.toString());
         }
     }
+
     //function to add new account to file
     public void addNewAccount(View view){
         final Intent addAccount = new Intent(this, NewAccountCreation.class);
@@ -90,5 +104,13 @@ public class ShowAccountsActivity extends AppCompatActivity {
         final Intent viewAccount = new Intent(this, ViewSingleAccountActivity.class);
         viewAccount.putExtra(PARCEL_DATA, accessedAccount);
         startActivity(viewAccount);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(getString(R.string.pref_file_key), "0");
     }
 }

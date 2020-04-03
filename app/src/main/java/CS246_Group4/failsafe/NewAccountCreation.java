@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.util.Log;
@@ -34,6 +35,7 @@ public class NewAccountCreation extends AppCompatActivity {
     private String userHashPass;
     private Button pwdGenerator;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +47,7 @@ public class NewAccountCreation extends AppCompatActivity {
         pwdGenerator = findViewById(R.id.GeneratePassword);
         Intent intent = getIntent();
         userHashPass = intent.getStringExtra(ShowAccountsActivity.USERS_HASHED_PASS);
+
 
 
         Save = findViewById(R.id.Save);
@@ -84,9 +87,11 @@ public class NewAccountCreation extends AppCompatActivity {
                 BufferedReader bufferedReader = new BufferedReader(iread);
                 String receiveString = "";
                 StringBuilder builder = new StringBuilder();
+                int fileLineCounter = 0;
 
                 while ((receiveString = bufferedReader.readLine()) != null) {
                     builder.append(System.lineSeparator()).append(receiveString);
+
                 }
                 istream.close();
                 fileContents = builder.toString();

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 
 public class ViewSingleAccountActivity extends AppCompatActivity {
@@ -28,5 +29,12 @@ public class ViewSingleAccountActivity extends AppCompatActivity {
         username.setText(unparceledAccount.getUsername());
         password.setText(unparceledAccount.getPassword());
         url.setText(unparceledAccount.getURL());
+        String test = new String();
+    }
+
+    public void generatePwd(View view){
+        PasswordGenerator passwordGenerator = new PasswordGenerator();
+        String randomStrongPwd = passwordGenerator.generateNewPassword();
+        password.setText(randomStrongPwd);
     }
 }
