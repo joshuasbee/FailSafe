@@ -136,7 +136,7 @@ public class ShowAccountsActivity extends AppCompatActivity {
     }
 
     public void openSettings(View view){
-        final Intent openSet = new Intent(this, FingerPrintScanner.class);
+        final Intent openSet = new Intent(this, FingerPrintActivity.class);
         startActivity(openSet);
         finish();
     }
