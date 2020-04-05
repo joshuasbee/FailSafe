@@ -21,6 +21,7 @@ import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,11 +34,15 @@ public class ShowAccountsActivity extends AppCompatActivity {
     public static final String USERS_HASHED_PASS = "hash";
     public  static final String PARCEL_DATA = "parcelable data";
     private Button buttonAdd;
+    private Button buttonSet;
     private Context context = this;
     SharedPreferences sharedPref;
+    private static Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_accounts);
         listOfAccounts = findViewById(R.id.listOfAccounts);
@@ -68,6 +73,10 @@ public class ShowAccountsActivity extends AppCompatActivity {
         });
         buttonAdd = findViewById(R.id.buttonAdd);
         buttonAdd.setOnClickListener((view)->addNewAccount(view));
+
+        buttonSet = findViewById(R.id.settingsButton);
+        buttonSet.setOnClickListener((view)->openSettings(view));
+
         sharedPref = this.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(getString(R.string.pref_file_key), usersHashedPass);
@@ -125,4 +134,11 @@ public class ShowAccountsActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(getString(R.string.pref_file_key), "0");
     }
+
+    public void openSettings(View view){
+        final Intent openSet = new Intent(this, FingerPrintScanner.class);
+        startActivity(openSet);
+        finish();
+    }
+
 }
